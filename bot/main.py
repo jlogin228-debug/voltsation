@@ -14,6 +14,8 @@ import math
 from datetime import datetime
 from typing import Optional, Dict, List
 from aiogram import Bot, Dispatcher, F
+from aiogram.client.default import DefaultBotProperties
+from aiogram.enums import ParseMode
 from aiogram.filters import Command, StateFilter
 from aiogram.types import (
     Message, CallbackQuery, InlineKeyboardMarkup, 
@@ -48,7 +50,10 @@ if not BOT_TOKEN:
     raise ValueError("❌ BOT_TOKEN не установлен!")
 
 # Инициализация
-bot = Bot(token=BOT_TOKEN, parse_mode="HTML")
+bot = Bot(
+    token=BOT_TOKEN,
+    default=DefaultBotProperties(parse_mode=ParseMode.HTML)
+)
 dp = Dispatcher(storage=MemoryStorage())
 
 # Кэш для токена GigaChat
