@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="VoltStation - сеть быстрых зарядных станций для электросамокатов и электровелосипедов в Нижневартовске. Заряди свой путь быстро, рядом, безопасно.">
+    <meta name="keywords" content="зарядка электросамокатов, зарядка электровелосипедов, зарядная станция, VoltStation, быстрая зарядка, электротранспорт, зарядка 24/7">
+    <meta name="author" content="VoltStation">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="VoltStation - Быстрая зарядка электросамокатов и электровелосипедов">
+    <meta property="og:description" content="Сеть автоматических зарядных станций для электротранспорта в Нижневартовске. Доступ 24/7, быстрая зарядка, безопасность.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://voltstationnv.ru">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://voltstationnv.ru">
+    <title>VoltStation - Быстрая зарядка электросамокатов и электровелосипедов</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <rect x="8" y="6" width="16" height="20" rx="2" stroke="url(#gradient1)" stroke-width="2"/>
+                        <path d="M12 12L16 16L20 12" stroke="url(#gradient1)" stroke-width="2" stroke-linecap="round"/>
+                        <defs>
+                            <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#00FF88;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span class="logo-text">VoltStation</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#services" class="nav-link">Услуги</a>
+                    <a href="#locations" class="nav-link">Локации</a>
+                    <a href="#bot" class="nav-link">Telegram-бот</a>
+                    <a href="https://t.me/voltstation_bot" class="btn-primary" target="_blank">Написать в бот</a>
+                </div>
+                <button class="mobile-menu-toggle" aria-label="Меню">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-background">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="grid-pattern"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text fade-in-up">
+                    <h1 class="hero-title">
+                        Заряди свой путь.<br>
+                        <span class="gradient-text">Быстро. Рядом. Безопасно.</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Сеть автоматических зарядных станций для электросамокатов и электровелосипедов 
+                        в спальных районах Нижневартовска. Доступ 24/7, быстрая зарядка, безопасность.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#locations" class="btn-primary btn-large">
+                            <span>Найти станцию</span>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </a>
+                        <a href="https://t.me/voltstation_bot" class="btn-secondary btn-large" target="_blank">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M10 2C5.58 2 2 5.58 2 10C2 14.42 5.58 18 10 18C14.42 18 18 14.42 18 10C18 5.58 14.42 2 10 2ZM13.5 6.5L12.5 13.5L11 12L9.5 13.5L8 12L6.5 13.5L5.5 6.5L13.5 6.5Z" fill="currentColor"/>
+                            </svg>
+                            <span>Написать в Telegram-бот</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-visual fade-in-right">
+                    <div class="charging-icon">
+                        <div class="battery">
+                            <div class="battery-level"></div>
+                            <div class="battery-bolt">
+                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                    <path d="M20 5L15 20H20L18 35L25 20H20L20 5Z" fill="url(#boltGradient)"/>
+                                    <defs>
+                                        <linearGradient id="boltGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#00FF88;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem" id="problem">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2 class="section-title">Проблема, которую мы решаем</h2>
+                <p class="section-subtitle">Жители спальных районов сталкиваются с трудностями при зарядке электротранспорта</p>
+            </div>
+            <div class="problem-grid">
+                <div class="problem-card fade-in-up" data-delay="0">
+                    <div class="problem-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                            <circle cx="24" cy="24" r="20" stroke="url(#problemGrad1)" stroke-width="2"/>
+                            <path d="M24 12V24L32 28" stroke="url(#problemGrad1)" stroke-width="2" stroke-linecap="round"/>
+                            <defs>
+                                <linearGradient id="problemGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#00FF88;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3>Нет зарядок рядом</h3>
+                    <p>В спальных районах Нижневартовска практически отсутствует инфраструктура для зарядки электротранспорта</p>
+                </div>
+                <div class="problem-card fade-in-up" data-delay="100">
+                    <div class="problem-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                            <rect x="12" y="8" width="24" height="32" rx="2" stroke="url(#problemGrad2)" stroke-width="2"/>
+                            <path d="M18 20H30M18 24H30M18 28H26" stroke="url(#problemGrad2)" stroke-width="2" stroke-linecap="round"/>
+                            <defs>
+                                <linearGradient id="problemGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#00FF88;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3>Нельзя заряжать дома</h3>
+                    <p>Многие живут в квартирах без возможности поднять тяжёлый аккумулятор на этаж</p>
+                </div>
+                <div class="problem-card fade-in-up" data-delay="200">
+                    <div class="problem-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                            <path d="M24 8L8 16V32L24 40L40 32V16L24 8Z" stroke="url(#problemGrad3)" stroke-width="2"/>
+                            <circle cx="24" cy="24" r="8" stroke="url(#problemGrad3)" stroke-width="2"/>
+                            <defs>
+                                <linearGradient id="problemGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#00FF88;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3>Нехватка инфраструктуры</h3>
+                    <p>Городская инфраструктура не успевает за ростом популярности электротранспорта</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution" id="solution">
+        <div class="container">
+            <div class="solution-content">
+                <div class="solution-text fade-in-left">
+                    <h2 class="section-title">Решение VoltStation</h2>
+                    <p class="section-subtitle">Сеть автоматических зарядных станций в шаговой доступности от вашего дома</p>
+                    <div class="solution-features">
+                        <div class="solution-feature">
+                            <div class="feature-check">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M20 6L9 17L4 12" stroke="url(#checkGrad)" stroke-width="2" stroke-linecap="round"/>
+                                    <defs>
+                                        <linearGradient id="checkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#00FF88;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3>Автоматические станции</h3>
+                                <p>Полностью автоматизированный процесс зарядки без участия оператора</p>
+                            </div>
+                        </div>
+                        <div class="solution-feature">
+                            <div class="feature-check">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M20 6L9 17L4 12" stroke="url(#checkGrad2)" stroke-width="2" stroke-linecap="round"/>
+                                    <defs>
+                                        <linearGradient id="checkGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#00FF88;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3>Доступ 24/7</h3>
+                                <p>Заряжайтесь в любое время дня и ночи, когда вам удобно</p>
+                            </div>
+                        </div>
+                        <div class="solution-feature">
+                            <div class="feature-check">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M20 6L9 17L4 12" stroke="url(#checkGrad3)" stroke-width="2" stroke-linecap="round"/>
+                                    <defs>
+                                        <linearGradient id="checkGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#00FF88;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3>Удобная оплата</h3>
+                                <p>QR-код, мобильное приложение или Telegram-бот — выбирайте удобный способ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="solution-steps fade-in-right">
+                    <h3 class="steps-title">Как это работает</h3>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Найдите станцию</h4>
+                                <p>Через карту или Telegram-бот найдите ближайшую станцию</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Подключите устройство</h4>
+                                <p>Подключите аккумулятор к станции и отсканируйте QR-код</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Заряжайтесь</h4>
+                                <p>Дождитесь завершения зарядки и заберите устройство</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits" id="benefits">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2 class="section-title">Почему выбирают VoltStation</h2>
+                <p class="section-subtitle">Преимущества, которые делают зарядку простой и удобной</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card fade-in-up" data-delay="0">
+                    <div class="benefit-icon">
+                        <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                            <circle cx="28" cy="28" r="24" stroke="url(#benefitGrad1)" stroke-width="2"/>
+                            <path d="M28 8V28L40 36" stroke="url(#benefitGrad1)" stroke-width="2" stroke-linecap="round"/>
+                            <defs>
+                                <linearGradient id="benefitGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#00FF88;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3>Быстрая зарядка</h3>
+                    <p>Современные технологии позволяют зарядить аккумулятор за минимальное время</p>
+                </div>
+                <div class="benefit-card fade-in-up" data-delay="100">
+                    <div class="benefit-icon">
+                        <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                            <rect x="12" y="8" width="32" height="40" rx="2" stroke="url(#benefitGrad2)" stroke-width="2"/>
+                            <path d="M20 20H36M20 28H36M20 36H28" stroke="url(#benefitGrad2)" stroke-width="2" stroke-linecap="round"/>
+                            <defs>
+                                <linearGradient id="benefitGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#00FF88;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3>Безопасность</h3>
+                    <p>Видеонаблюдение и защита от перегрузок обеспечивают безопасность вашего устройства</p>
+                </div>
+                <div class="benefit-card fade-in-up" data-delay="200">
+                    <div class="benefit-icon">
+                        <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                            <path d="M28 4L8 16V28C8 40 28 52 28 52C28 52 48 40 48 28V16L28 4Z" stroke="url(#benefitGrad3)" stroke-width="2"/>
+                            <circle cx="28" cy="28" r="8" stroke="url(#benefitGrad3)" stroke-width="2"/>
+                            <defs>
+                                <linearGradient id="benefitGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#00FF88;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3>Шаговая доступность</h3>
+                    <p>Станции расположены в шаговой доступности от жилых домов</p>
+                </div>
+                <div class="benefit-card fade-in-up" data-delay="300">
+                    <div class="benefit-icon">
+                        <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                            <circle cx="28" cy="28" r="20" stroke="url(#benefitGrad4)" stroke-width="2"/>
+                            <path d="M28 16V28L36 32" stroke="url(#benefitGrad4)" stroke-width="2" stroke-linecap="round"/>
+                            <defs>
+                                <linearGradient id="benefitGrad4" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#00FF88;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3>Экологичность</h3>
+                    <p>Использование возобновляемой энергии для зарядки вашего транспорта</p>
+                </div>
+                <div class="benefit-card fade-in-up" data-delay="400">
+                    <div class="benefit-icon">
+                        <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                            <rect x="12" y="8" width="32" height="40" rx="4" stroke="url(#benefitGrad5)" stroke-width="2"/>
+                            <rect x="18" y="14" width="20" height="28" rx="2" stroke="url(#benefitGrad5)" stroke-width="2"/>
+                            <defs>
+                                <linearGradient id="benefitGrad5" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#00FF88;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3>Современный дизайн</h3>
+                    <p>Стильные станции, которые гармонично вписываются в городскую среду</p>
+                </div>
+                <div class="benefit-card fade-in-up" data-delay="500">
+                    <div class="benefit-icon">
+                        <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                            <path d="M28 8L20 20H28V36L36 24H28V8Z" stroke="url(#benefitGrad6)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <defs>
+                                <linearGradient id="benefitGrad6" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#00FF88;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3>Технологичность</h3>
+                    <p>Интеграция с мобильными приложениями и умными системами</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2 class="section-title">Услуги и цены</h2>
+                <p class="section-subtitle">Прозрачные тарифы для всех типов электротранспорта</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-in-up" data-delay="0">
+                    <div class="service-icon">
+                        <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                            <path d="M32 8L16 20V36L32 48L48 36V20L32 8Z" stroke="url(#serviceGrad1)" stroke-width="2"/>
+                            <circle cx="32" cy="28" r="12" stroke="url(#serviceGrad1)" stroke-width="2"/>
+                            <defs>
+                                <linearGradient id="serviceGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#00FF88;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3>Электросамокаты</h3>
+                    <div class="service-price">
+                        <span class="price">от 150₽</span>
+                        <span class="price-label">за зарядку</span>
+                    </div>
+                    <ul class="service-features">
+                        <li>Быстрая зарядка 1-2 часа</li>
+                        <li>Поддержка всех типов аккумуляторов</li>
+                        <li>Автоматическое определение параметров</li>
+                    </ul>
+                    <a href="#bot" class="btn-secondary">Узнать больше</a>
+                </div>
+                <div class="service-card featured fade-in-up" data-delay="100">
+                    <div class="service-badge">Популярно</div>
+                    <div class="service-icon">
+                        <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                            <path d="M32 8L20 16V32L32 40L44 32V16L32 8Z" stroke="url(#serviceGrad2)" stroke-width="2"/>
+                            <circle cx="32" cy="24" r="10" stroke="url(#serviceGrad2)" stroke-width="2"/>
+                            <defs>
+                                <linearGradient id="serviceGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#00FF88;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3>Электровелосипеды</h3>
+                    <div class="service-price">
+                        <span class="price">от 200₽</span>
+                        <span class="price-label">за зарядку</span>
+                    </div>
+                    <ul class="service-features">
+                        <li>Зарядка мощных аккумуляторов</li>
+                        <li>Время зарядки 2-3 часа</li>
+                        <li>Защита от перегрузок</li>
+                    </ul>
+                    <a href="#bot" class="btn-primary">Узнать больше</a>
+                </div>
+                <div class="service-card fade-in-up" data-delay="200">
+                    <div class="service-icon">
+                        <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                            <rect x="16" y="12" width="32" height="40" rx="2" stroke="url(#serviceGrad3)" stroke-width="2"/>
+                            <path d="M24 20H40M24 28H40M24 36H32" stroke="url(#serviceGrad3)" stroke-width="2" stroke-linecap="round"/>
+                            <defs>
+                                <linearGradient id="serviceGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#00FF88;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3>Абонементы</h3>
+                    <div class="service-price">
+                        <span class="price">от 999₽</span>
+                        <span class="price-label">в месяц</span>
+                    </div>
+                    <ul class="service-features">
+                        <li>Неограниченное количество зарядок</li>
+                        <li>Приоритетный доступ к станциям</li>
+                        <li>Скидки на дополнительные услуги</li>
+                    </ul>
+                    <a href="#bot" class="btn-secondary">Оформить подписку</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Locations Section -->
+    <section class="locations" id="locations">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2 class="section-title">Локации</h2>
+                <p class="section-subtitle">Станции в Нижневартовске</p>
+            </div>
+            <div class="locations-content">
+                <div class="map-container fade-in-left">
+                    <div id="map" class="yandex-map"></div>
+                </div>
+                <div class="locations-info fade-in-right">
+                    <h3>Станции в Нижневартовске</h3>
+                    <p>В 2026 году сеть VoltStation активно работает в Нижневартовске. На карте отмечены действующие и новые станции в спальных районах города. Мы продолжаем расширять сеть для удобства жителей.</p>
+                    <div class="location-features">
+                        <div class="location-feature">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M20 6L9 17L4 12" stroke="url(#locationCheck)" stroke-width="2" stroke-linecap="round"/>
+                                <defs>
+                                    <linearGradient id="locationCheck" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#00FF88;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                            <span>Шаговая доступность от дома</span>
+                        </div>
+                        <div class="location-feature">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M20 6L9 17L4 12" stroke="url(#locationCheck2)" stroke-width="2" stroke-linecap="round"/>
+                                <defs>
+                                    <linearGradient id="locationCheck2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#00FF88;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                            <span>Безопасные и освещённые места</span>
+                        </div>
+                        <div class="location-feature">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M20 6L9 17L4 12" stroke="url(#locationCheck3)" stroke-width="2" stroke-linecap="round"/>
+                                <defs>
+                                    <linearGradient id="locationCheck3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#00FF88;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                            <span>Крытые площадки для защиты от дождя</span>
+                        </div>
+                    </div>
+                    <a href="#bot" class="btn-primary btn-large">
+                        <span>Найти ближайшую станцию</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Telegram Bot Section -->
+    <section class="telegram-bot" id="bot">
+        <div class="container">
+            <div class="bot-content">
+                <div class="bot-text fade-in-left">
+                    <h2 class="section-title">Telegram-бот с ИИ</h2>
+                    <p class="section-subtitle">Умный помощник для управления зарядкой</p>
+                    <p class="bot-description">
+                        Наш Telegram-бот с искусственным интеллектом работает с 2025 года и уже помог тысячам пользователей. 
+                        Он поможет вам найти ближайшую станцию, узнать цены, режим работы и ответит на любые вопросы о сервисе.
+                    </p>
+                    <div class="bot-features">
+                        <div class="bot-feature">
+                            <div class="bot-feature-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="url(#botIcon1)" stroke-width="2"/>
+                                    <path d="M2 17L12 22L22 17" stroke="url(#botIcon1)" stroke-width="2"/>
+                                    <path d="M2 12L12 17L22 12" stroke="url(#botIcon1)" stroke-width="2"/>
+                                    <defs>
+                                        <linearGradient id="botIcon1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#00FF88;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>Поиск ближайшей станции</h4>
+                                <p>Определите ваше местоположение и найдите самую близкую станцию</p>
+                            </div>
+                        </div>
+                        <div class="bot-feature">
+                            <div class="bot-feature-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect x="4" y="4" width="16" height="16" rx="2" stroke="url(#botIcon2)" stroke-width="2"/>
+                                    <path d="M8 8H16M8 12H16M8 16H12" stroke="url(#botIcon2)" stroke-width="2" stroke-linecap="round"/>
+                                    <defs>
+                                        <linearGradient id="botIcon2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#00FF88;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>Информация о ценах</h4>
+                                <p>Узнайте актуальные тарифы и доступные абонементы</p>
+                            </div>
+                        </div>
+                        <div class="bot-feature">
+                            <div class="bot-feature-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="10" stroke="url(#botIcon3)" stroke-width="2"/>
+                                    <path d="M12 6V12L16 14" stroke="url(#botIcon3)" stroke-width="2" stroke-linecap="round"/>
+                                    <defs>
+                                        <linearGradient id="botIcon3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#00FF88;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>Режим работы</h4>
+                                <p>Проверьте доступность станций в реальном времени</p>
+                            </div>
+                        </div>
+                        <div class="bot-feature">
+                            <div class="bot-feature-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z" stroke="url(#botIcon4)" stroke-width="2"/>
+                                    <defs>
+                                        <linearGradient id="botIcon4" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#00FF88;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>Связь с оператором</h4>
+                                <p>При необходимости переключитесь на живого оператора</p>
+                            </div>
+                        </div>
+                        <div class="bot-feature">
+                            <div class="bot-feature-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="10" stroke="url(#botIcon5)" stroke-width="2"/>
+                                    <path d="M9 9H15M9 12H15M9 15H12" stroke="url(#botIcon5)" stroke-width="2" stroke-linecap="round"/>
+                                    <defs>
+                                        <linearGradient id="botIcon5" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#00FF88;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>Ответы ИИ на вопросы</h4>
+                                <p>Искусственный интеллект ответит на ваши вопросы 24/7</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="https://t.me/voltstation_bot" class="btn-primary btn-large" target="_blank">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM16.64 8.8C16.49 10.38 15.84 14.22 15.51 15.99C15.37 16.74 15.09 16.99 14.83 17.02C14.25 17.07 13.81 16.64 13.25 16.27C12.37 15.69 11.87 15.33 11.02 14.77C10.03 14.12 10.67 13.76 11.24 13.18C11.39 13.03 13.95 10.7 14 10.56C14.05 10.42 14.07 10.3 14.02 10.19C13.97 10.08 13.86 10.02 13.75 9.98C13.6 9.92 12.17 9.03 11.45 8.59C11.21 8.43 11.01 8.35 10.84 8.35C10.5 8.35 10.21 8.64 10.21 9.18C10.21 9.72 10.25 9.85 10.4 10.12C10.55 10.39 11.08 11.05 11.3 11.3C11.52 11.55 11.74 11.78 11.9 12.05C12.06 12.32 12.14 12.54 12.2 12.76C12.28 13.05 12.3 13.28 12.25 13.45C12.2 13.62 12.1 13.75 11.95 13.9C11.8 14.05 11.65 14.2 11.5 14.35C11.35 14.5 11.2 14.65 11.35 14.85C11.5 15.05 12.05 15.6 12.7 16.1C13.5 16.75 14.15 17.2 14.6 17.5C15.05 17.8 15.4 17.95 15.7 18.05C16.05 18.15 16.35 18.1 16.55 17.95C16.8 17.75 17.55 16.7 18.15 15.7C18.75 14.7 19.25 13.75 19.3 13.5C19.35 13.25 19.4 13.05 19.35 12.95C19.3 12.85 19.2 12.8 19.05 12.75C18.9 12.7 17.65 12.2 16.64 11.8Z" fill="currentColor"/>
+                        </svg>
+                        <span>Перейти в Telegram-бот</span>
+                    </a>
+                </div>
+                <div class="bot-visual fade-in-right">
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <div class="chat-header">
+                                <div class="chat-avatar"></div>
+                                <div class="chat-info">
+                                    <div class="chat-name">VoltStation Bot</div>
+                                    <div class="chat-status">онлайн</div>
+                                </div>
+                            </div>
+                            <div class="chat-messages">
+                                <div class="message bot-message">
+                                    <div class="message-text">Привет! Я помогу найти ближайшую зарядную станцию. Где вы находитесь?</div>
+                                </div>
+                                <div class="message user-message">
+                                    <div class="message-text">Рядом с метро Парк Победы</div>
+                                </div>
+                                <div class="message bot-message">
+                                    <div class="message-text">Найдено 3 станции рядом с вами. Ближайшая в 200 метрах. Показать на карте?</div>
+                                </div>
+                                <div class="message user-message">
+                                    <div class="message-text">Да, покажи</div>
+                                </div>
+                                <div class="message bot-message">
+                                    <div class="message-text">📍 Станция на ул. Ленина, 15<br>⏱ Доступна сейчас<br>💰 150₽ за зарядку</div>
+                                </div>
+                            </div>
+                            <div class="chat-input">
+                                <input type="text" placeholder="Напишите сообщение..." disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="cta">
+        <div class="container">
+            <div class="cta-content fade-in-up">
+                <h2 class="cta-title">Заряжайся там, где живёшь</h2>
+                <p class="cta-subtitle">Присоединяйтесь к сообществу пользователей VoltStation и заряжайте свой транспорт быстро и безопасно</p>
+                <div class="cta-buttons">
+                    <a href="https://t.me/voltstation_bot" class="btn-primary btn-large" target="_blank">
+                        <span>Начать сейчас</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </a>
+                    <a href="#locations" class="btn-secondary btn-large">
+                        <span>Узнать о локациях</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <rect x="8" y="6" width="16" height="20" rx="2" stroke="url(#footerGrad)" stroke-width="2"/>
+                            <path d="M12 12L16 16L20 12" stroke="url(#footerGrad)" stroke-width="2" stroke-linecap="round"/>
+                            <defs>
+                                <linearGradient id="footerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#00FF88;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <span class="logo-text">VoltStation</span>
+                    </div>
+                    <p class="footer-description">Сеть быстрых зарядных станций для электротранспорта в Нижневартовске</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Сервис</h4>
+                        <a href="#services">Услуги</a>
+                        <a href="#locations">Локации</a>
+                        <a href="#benefits">Преимущества</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Контакты</h4>
+                        <a href="https://t.me/voltstation_bot" target="_blank">Telegram-бот</a>
+                        <a href="mailto:info@voltstationnv.ru">info@voltstationnv.ru</a>
+                        <a href="tel:+78001234567">+7 (800) 123-45-67</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Информация</h4>
+                        <a href="#solution">Как это работает</a>
+                        <a href="#bot">Telegram-бот</a>
+                        <span>Режим работы: 24/7</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 VoltStation. Все права защищены.</p>
+                <div class="footer-legal">
+                    <a href="#">Политика конфиденциальности</a>
+                    <a href="#">Условия использования</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    <script src="script.js"></script>
+</body>
+</html>
