@@ -344,6 +344,13 @@ async def main():
     logger.info(f"GIGACHAT_CLIENT_SECRET установлен: {bool(GIGACHAT_CLIENT_SECRET)}")
     logger.info("=" * 50)
     
+    # Удаляем webhook, если он установлен
+    try:
+        await bot.delete_webhook(drop_pending_updates=True)
+        logger.info("✅ Webhook удалён, используем polling")
+    except Exception as e:
+        logger.warning(f"⚠️ Не удалось удалить webhook: {e}")
+    
     if GIGACHAT_CLIENT_ID and GIGACHAT_CLIENT_SECRET:
         logger.info("✅ GigaChat настроен")
     else:
