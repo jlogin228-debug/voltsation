@@ -341,7 +341,7 @@ def find_nearest_stations(user_lat: float, user_lon: float, limit: int = 3) -> L
     return active_stations[:limit]
 
 
-def format_station_info(station: Dict) -> str:
+def format_station_info(station: Dict, include_distance: bool = False) -> str:
     """Форматировать информацию о станции"""
     if station["status"] == "coming_soon":
         return (
@@ -351,21 +351,31 @@ def format_station_info(station: Dict) -> str:
             f"🔌 Слотов: {station['slots']}"
         )
     
-    status_emoji = "🟢" if station["available"] > 0 else "🟡"
+    status_emoji = "🟢" if station.get("available", 0) > 0 else "🟡"
     features_text = "\n".join([f"  ✓ {f}" for f in station.get("features", [])])
     
-    return (
+    text = (
         f"{status_emoji} <b>{station['name']}</b>\n\n"
         f"📍 <b>Адрес:</b> {station['address']}\n"
-        f"📏 <b>Расстояние:</b> {station['distance']:.2f} км\n"
-        f"⭐ <b>Рейтинг:</b> {station.get('rating', 'N/A')}\n"
-        f"🔌 <b>Доступно:</b> {station['available']}/{station['slots']} слотов\n\n"
-        f"💰 <b>Цены:</b>\n"
-        f"  🛴 Самокаты: {station['price_scooter']}₽\n"
-        f"  🚲 Велосипеды: {station['price_bike']}₽\n\n"
-        f"✨ <b>Особенности:</b>\n{features_text}\n\n"
-        f"⏰ <b>Режим работы:</b> 24/7"
     )
+    
+    if include_distance and "distance" in station:
+        text += f"📏 <b>Расстояние:</b> {station['distance']:.2f} км\n"
+    
+    text += (
+        f"⭐ <b>Рейтинг:</b> {station.get('rating', 'N/A')}\n"
+        f"🔌 <b>Доступно:</b> {station.get('available', 0)}/{station['slots']} слотов\n\n"
+        f"💰 <b>Цены:</b>\n"
+        f"  🛴 Самокаты: {station.get('price_scooter', 150)}₽\n"
+        f"  🚲 Велосипеды: {station.get('price_bike', 200)}₽\n\n"
+    )
+    
+    if features_text:
+        text += f"✨ <b>Особенности:</b>\n{features_text}\n\n"
+    
+    text += f"⏰ <b>Режим работы:</b> 24/7"
+    
+    return text
 
 
 # ==================== КЛАВИАТУРЫ ====================
@@ -606,144 +616,230 @@ async def cmd_operator(message: Message):
 # ==================== ОБРАБОТЧИКИ CALLBACK ====================
 
 @dp.callback_query(F.data == "back_to_main")
-async def callback_back(callback: CallbackQuery):
+async def callback_back(callback: CallbackQuery, state: FSMContext):
     """Возврат в главное меню"""
-    await callback.message.edit_text(
-        "⚡ <b>VoltStation</b>\n\n"
-        "Выберите действие:",
-        reply_markup=get_main_keyboard()
-    )
+    try:
+        await callback.message.edit_text(
+            "⚡ <b>VoltStation</b>\n\n"
+            "Выберите действие:",
+            reply_markup=get_main_keyboard()
+        )
+    except Exception as e:
+        # Если не удалось отредактировать (например, сообщение было отправлено как новое)
+        logger.warning(f"Не удалось отредактировать сообщение: {e}")
+        await callback.message.answer(
+            "⚡ <b>VoltStation</b>\n\n"
+            "Выберите действие:",
+            reply_markup=get_main_keyboard()
+        )
+    
+    await state.clear()
     await callback.answer()
 
 
 @dp.callback_query(F.data == "find_station")
 async def callback_find(callback: CallbackQuery, state: FSMContext):
     """Поиск станции"""
-    await callback.message.edit_text(
-        "🔍 <b>Поиск ближайшей станции</b>\n\n"
-        "Отправьте вашу геолокацию:",
-        reply_markup=get_location_keyboard()
-    )
-    await state.set_state(BotStates.waiting_location)
+    try:
+        await callback.message.edit_text(
+            "🔍 <b>Поиск ближайшей станции</b>\n\n"
+            "Отправьте вашу геолокацию:",
+            reply_markup=get_location_keyboard()
+        )
+        await state.set_state(BotStates.waiting_location)
+    except Exception as e:
+        logger.error(f"Ошибка в callback_find: {e}")
+        await callback.message.answer(
+            "🔍 <b>Поиск ближайшей станции</b>\n\n"
+            "Отправьте вашу геолокацию:",
+            reply_markup=get_location_keyboard()
+        )
+        await state.set_state(BotStates.waiting_location)
+    
     await callback.answer()
 
 
 @dp.callback_query(F.data == "prices")
 async def callback_prices(callback: CallbackQuery):
     """Цены"""
-    builder = InlineKeyboardBuilder()
-    builder.row(
-        InlineKeyboardButton(text="📋 Абонемент", callback_data="subscription"),
-        InlineKeyboardButton(text="📞 Связаться", callback_data="operator")
-    )
-    builder.row(InlineKeyboardButton(text="◀️ Назад", callback_data="back_to_main"))
+    try:
+        builder = InlineKeyboardBuilder()
+        builder.row(
+            InlineKeyboardButton(text="📋 Абонемент", callback_data="subscription"),
+            InlineKeyboardButton(text="📞 Связаться", callback_data="operator")
+        )
+        builder.row(InlineKeyboardButton(text="◀️ Назад", callback_data="back_to_main"))
+        
+        await callback.message.edit_text(
+            "💰 <b>Цены и тарифы</b>\n\n"
+            "<b>🛴 Разовые зарядки:</b>\n"
+            "• Электросамокаты: <b>от 150₽</b>\n"
+            "• Электровелосипеды: <b>от 200₽</b>\n\n"
+            "<b>📅 Абонементы:</b>\n"
+            "• Базовый: <b>999₽/месяц</b>\n"
+            "  └ Неограниченные зарядки\n"
+            "  └ Приоритетный доступ\n\n"
+            "<b>💳 Оплата:</b> карта, QR, Telegram",
+            reply_markup=builder.as_markup()
+        )
+    except Exception as e:
+        logger.error(f"Ошибка в callback_prices: {e}")
+        await callback.message.answer(
+            "💰 <b>Цены и тарифы</b>\n\n"
+            "Электросамокаты: от 150₽\n"
+            "Электровелосипеды: от 200₽\n"
+            "Абонементы: от 999₽/месяц",
+            reply_markup=get_main_keyboard()
+        )
     
-    await callback.message.edit_text(
-        "💰 <b>Цены и тарифы</b>\n\n"
-        "<b>🛴 Разовые зарядки:</b>\n"
-        "• Электросамокаты: <b>от 150₽</b>\n"
-        "• Электровелосипеды: <b>от 200₽</b>\n\n"
-        "<b>📅 Абонементы:</b>\n"
-        "• Базовый: <b>999₽/месяц</b>\n"
-        "  └ Неограниченные зарядки\n"
-        "  └ Приоритетный доступ\n\n"
-        "<b>💳 Оплата:</b> карта, QR, Telegram",
-        reply_markup=builder.as_markup()
-    )
     await callback.answer()
 
 
 @dp.callback_query(F.data == "schedule")
 async def callback_schedule(callback: CallbackQuery):
     """Режим работы"""
-    active = [s for s in STATIONS if s["status"] == "active"]
-    text = f"⏰ <b>Режим работы</b>\n\n🟢 Работает: {len(active)} станций\n\n"
-    for s in active:
-        text += f"• {s['name']} - {s['address']}\n"
-    text += "\n💡 Все станции работают <b>24/7</b>!"
+    try:
+        active = [s for s in STATIONS if s["status"] == "active"]
+        coming_soon = [s for s in STATIONS if s["status"] == "coming_soon"]
+        
+        text = f"⏰ <b>Режим работы</b>\n\n🟢 Работает: {len(active)} станций\n\n"
+        for s in active:
+            text += f"• {s['name']} - {s['address']}\n"
+        
+        if coming_soon:
+            text += f"\n🚧 Скоро откроются: {len(coming_soon)} станций\n"
+            for s in coming_soon:
+                text += f"• {s['name']} - {s['address']} ({s.get('opens', 'Скоро')})\n"
+        
+        text += "\n💡 Все станции работают <b>24/7</b>!"
+        
+        keyboard = InlineKeyboardMarkup(inline_keyboard=[[
+            InlineKeyboardButton(text="◀️ Назад", callback_data="back_to_main")
+        ]])
+        
+        await callback.message.edit_text(text, reply_markup=keyboard)
+    except Exception as e:
+        logger.error(f"Ошибка в callback_schedule: {e}")
+        await callback.message.answer(
+            "⏰ <b>Режим работы</b>\n\nВсе станции работают <b>24/7</b>!",
+            reply_markup=get_main_keyboard()
+        )
     
-    await callback.message.edit_text(text, reply_markup=InlineKeyboardMarkup(inline_keyboard=[[
-        InlineKeyboardButton(text="◀️ Назад", callback_data="back_to_main")
-    ]]))
     await callback.answer()
 
 
 @dp.callback_query(F.data == "subscription")
 async def callback_subscription(callback: CallbackQuery):
     """Абонементы"""
-    builder = InlineKeyboardBuilder()
-    builder.row(
-        InlineKeyboardButton(text="📞 Оформить", callback_data="operator"),
-        InlineKeyboardButton(text="◀️ Назад", callback_data="back_to_main")
-    )
+    try:
+        builder = InlineKeyboardBuilder()
+        builder.row(
+            InlineKeyboardButton(text="📞 Оформить", callback_data="operator"),
+            InlineKeyboardButton(text="◀️ Назад", callback_data="back_to_main")
+        )
+        
+        await callback.message.edit_text(
+            "📋 <b>Абонементы</b>\n\n"
+            "<b>🎯 Преимущества:</b>\n"
+            "✅ Неограниченные зарядки\n"
+            "✅ Приоритетный доступ\n"
+            "✅ Экономия до 50%\n\n"
+            "<b>💰 От 999₽/месяц</b>\n\n"
+            "Для оформления свяжитесь с нами:",
+            reply_markup=builder.as_markup()
+        )
+    except Exception as e:
+        logger.error(f"Ошибка в callback_subscription: {e}")
+        await callback.message.answer(
+            "📋 <b>Абонементы</b>\n\n"
+            "От 999₽/месяц - неограниченные зарядки!",
+            reply_markup=get_main_keyboard()
+        )
     
-    await callback.message.edit_text(
-        "📋 <b>Абонементы</b>\n\n"
-        "<b>🎯 Преимущества:</b>\n"
-        "✅ Неограниченные зарядки\n"
-        "✅ Приоритетный доступ\n"
-        "✅ Экономия до 50%\n\n"
-        "<b>💰 От 999₽/месяц</b>\n\n"
-        "Для оформления свяжитесь с нами:",
-        reply_markup=builder.as_markup()
-    )
     await callback.answer()
 
 
 @dp.callback_query(F.data == "operator")
 async def callback_operator(callback: CallbackQuery):
     """Оператор"""
-    builder = InlineKeyboardBuilder()
-    builder.row(
-        InlineKeyboardButton(text="📧 Email", url="mailto:info@voltstationnv.ru"),
-        InlineKeyboardButton(text="📞 Телефон", url="tel:+78001234567")
-    )
-    builder.row(InlineKeyboardButton(text="◀️ Назад", callback_data="back_to_main"))
+    try:
+        builder = InlineKeyboardBuilder()
+        builder.row(
+            InlineKeyboardButton(text="📧 Email", url="mailto:info@voltstationnv.ru"),
+            InlineKeyboardButton(text="📞 Телефон", url="tel:+78001234567")
+        )
+        builder.row(InlineKeyboardButton(text="◀️ Назад", callback_data="back_to_main"))
+        
+        await callback.message.edit_text(
+            "👨‍💼 <b>Связь с оператором</b>\n\n"
+            "📧 Email: info@voltstationnv.ru\n"
+            "📞 Телефон: +7 (800) 123-45-67\n"
+            "🌐 Сайт: voltstationnv.ru\n\n"
+            "⏰ Время работы: 9:00 - 21:00 (МСК)",
+            reply_markup=builder.as_markup()
+        )
+    except Exception as e:
+        logger.error(f"Ошибка в callback_operator: {e}")
+        await callback.message.answer(
+            "👨‍💼 <b>Связь с оператором</b>\n\n"
+            "📧 Email: info@voltstationnv.ru\n"
+            "📞 Телефон: +7 (800) 123-45-67",
+            reply_markup=get_main_keyboard()
+        )
     
-    await callback.message.edit_text(
-        "👨‍💼 <b>Связь с оператором</b>\n\n"
-        "📧 Email: info@voltstationnv.ru\n"
-        "📞 Телефон: +7 (800) 123-45-67\n"
-        "🌐 Сайт: voltstationnv.ru\n\n"
-        "⏰ Время работы: 9:00 - 21:00 (МСК)",
-        reply_markup=builder.as_markup()
-    )
     await callback.answer()
 
 
 @dp.callback_query(F.data == "help")
 async def callback_help(callback: CallbackQuery):
     """Помощь"""
-    await callback.message.edit_text(
-        "❓ <b>Помощь</b>\n\n"
-        "<b>Команды:</b>\n"
-        "/start - начать\n"
-        "/find - найти станцию\n"
-        "/prices - цены\n"
-        "/schedule - режим работы\n\n"
-        "Или просто задайте вопрос!",
-        reply_markup=InlineKeyboardMarkup(inline_keyboard=[[
+    try:
+        keyboard = InlineKeyboardMarkup(inline_keyboard=[[
             InlineKeyboardButton(text="◀️ Назад", callback_data="back_to_main")
         ]])
-    )
+        
+        await callback.message.edit_text(
+            "❓ <b>Помощь</b>\n\n"
+            "<b>Команды:</b>\n"
+            "/start - начать\n"
+            "/find - найти станцию\n"
+            "/prices - цены\n"
+            "/schedule - режим работы\n"
+            "/subscription - абонементы\n"
+            "/operator - оператор\n\n"
+            "💡 Или просто задайте вопрос текстом!",
+            reply_markup=keyboard
+        )
+    except Exception as e:
+        logger.error(f"Ошибка в callback_help: {e}")
+        await callback.message.answer(
+            "❓ <b>Помощь</b>\n\n"
+            "Используйте команды или задайте вопрос!",
+            reply_markup=get_main_keyboard()
+        )
+    
     await callback.answer()
 
 
 @dp.callback_query(F.data.startswith("map_"))
 async def callback_map(callback: CallbackQuery):
     """Показать станцию на карте"""
-    station_id = int(callback.data.split("_")[1])
-    station = next((s for s in STATIONS if s["id"] == station_id), None)
-    
-    if station:
-        await bot.send_location(
-            callback.message.chat.id,
-            latitude=station["lat"],
-            longitude=station["lon"]
-        )
-        await callback.answer("📍 Карта отправлена")
-    else:
-        await callback.answer("❌ Станция не найдена", show_alert=True)
+    try:
+        station_id = int(callback.data.split("_")[1])
+        station = next((s for s in STATIONS if s["id"] == station_id), None)
+        
+        if station:
+            await bot.send_location(
+                callback.message.chat.id,
+                latitude=station["lat"],
+                longitude=station["lon"]
+            )
+            await callback.answer("📍 Карта отправлена")
+        else:
+            await callback.answer("❌ Станция не найдена", show_alert=True)
+    except (ValueError, IndexError) as e:
+        logger.error(f"Ошибка обработки callback map_: {e}")
+        await callback.answer("❌ Ошибка обработки запроса", show_alert=True)
 
 
 # ==================== ОБРАБОТЧИКИ СООБЩЕНИЙ ====================
@@ -804,18 +900,38 @@ async def handle_location(message: Message, state: FSMContext):
 @dp.callback_query(F.data.startswith("station_"))
 async def callback_station_info(callback: CallbackQuery):
     """Информация о станции"""
-    station_id = int(callback.data.split("_")[1])
-    station = next((s for s in STATIONS if s["id"] == station_id), None)
-    
-    if station:
-        await callback.message.edit_text(
-            format_station_info(station),
-            reply_markup=get_station_keyboard(station_id)
-        )
-    else:
-        await callback.answer("❌ Станция не найдена", show_alert=True)
-    
-    await callback.answer()
+    try:
+        station_id = int(callback.data.split("_")[1])
+        # Ищем станцию в STATIONS, но также проверяем, есть ли она в кэше с расстоянием
+        station = next((s for s in STATIONS if s["id"] == station_id), None)
+        
+        if not station:
+            await callback.answer("❌ Станция не найдена", show_alert=True)
+            return
+        
+        # Создаём копию станции для безопасного форматирования
+        station_copy = station.copy()
+        
+        # Проверяем, есть ли расстояние (если станция была найдена через геолокацию)
+        has_distance = "distance" in station_copy
+        
+        try:
+            await callback.message.edit_text(
+                format_station_info(station_copy, include_distance=has_distance),
+                reply_markup=get_station_keyboard(station_id)
+            )
+        except Exception as e:
+            # Если не удалось отредактировать, отправляем новое сообщение
+            logger.warning(f"Не удалось отредактировать сообщение: {e}")
+            await callback.message.answer(
+                format_station_info(station_copy, include_distance=has_distance),
+                reply_markup=get_station_keyboard(station_id)
+            )
+        
+        await callback.answer()
+    except (ValueError, IndexError) as e:
+        logger.error(f"Ошибка обработки callback station_: {e}")
+        await callback.answer("❌ Ошибка обработки запроса", show_alert=True)
 
 
 @dp.message(F.text & ~F.text.startswith('/'))
