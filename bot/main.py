@@ -181,8 +181,29 @@ async def get_gigachat_token() -> Optional[str]:
         return None
     
     try:
-        auth_string = f"{GIGACHAT_CLIENT_ID}:{GIGACHAT_CLIENT_SECRET}"
-        auth_base64 = base64.b64encode(auth_string.encode()).decode()
+        client_secret = GIGACHAT_CLIENT_SECRET
+        
+        # Проверяем формат Client Secret
+        # Вариант 1: Client Secret уже в base64 и содержит ClientID:ClientSecret
+        try:
+            decoded = base64.b64decode(client_secret).decode('utf-8')
+            if ':' in decoded:
+                # Это уже ClientID:ClientSecret в текстовом виде
+                logger.info("Client Secret содержит ClientID:ClientSecret, используем декодированное значение")
+                auth_string = decoded
+                auth_base64 = base64.b64encode(auth_string.encode()).decode()
+            else:
+                # Декодировали, но это просто secret, добавляем ClientID
+                logger.info("Декодировали secret, добавляем ClientID")
+                auth_string = f"{GIGACHAT_CLIENT_ID}:{decoded}"
+                auth_base64 = base64.b64encode(auth_string.encode()).decode()
+        except Exception as decode_error:
+            # Если не декодируется, значит это обычный secret
+            logger.info("Client Secret не в base64, формируем ClientID:ClientSecret")
+            auth_string = f"{GIGACHAT_CLIENT_ID}:{client_secret}"
+            auth_base64 = base64.b64encode(auth_string.encode()).decode()
+        
+        logger.info(f"Используем auth_string (первые 20 символов): {auth_string[:20]}...")
         
         headers = {
             "Authorization": f"Basic {auth_base64}",
@@ -192,6 +213,7 @@ async def get_gigachat_token() -> Optional[str]:
         
         data = {"scope": "GIGACHAT_API_PERS"}
         
+        logger.info("Отправка запроса на получение токена GigaChat...")
         async with aiohttp.ClientSession() as session:
             async with session.post(
                 "https://ngw.devices.sberbank.ru:9443/api/v2/oauth",
@@ -200,21 +222,25 @@ async def get_gigachat_token() -> Optional[str]:
                 ssl=False,
                 timeout=aiohttp.ClientTimeout(total=30)
             ) as response:
+                response_text = await response.text()
+                logger.info(f"GigaChat OAuth ответ: статус {response.status}")
+                
                 if response.status == 200:
                     result = await response.json()
                     token = result.get("access_token")
                     if token:
                         gigachat_cache["token"] = token
                         gigachat_cache["expires_at"] = time.time() + (25 * 60)
-                        logger.info("✅ Токен GigaChat получен")
+                        logger.info("✅ Токен GigaChat получен успешно")
                         return token
                     else:
-                        logger.error(f"Токен не найден: {result}")
+                        logger.error(f"Токен не найден в ответе: {result}")
                 else:
-                    error_text = await response.text()
-                    logger.error(f"Ошибка OAuth: {response.status} - {error_text}")
+                    logger.error(f"Ошибка OAuth: {response.status} - {response_text}")
     except Exception as e:
         logger.error(f"Ошибка получения токена: {e}")
+        import traceback
+        logger.error(traceback.format_exc())
     
     return None
 
@@ -858,10 +884,11 @@ async def main():
     logger.info(f"{'✅' if GIGACHAT_CLIENT_SECRET else '❌'} GIGACHAT_CLIENT_SECRET: {'установлен' if GIGACHAT_CLIENT_SECRET else 'НЕ УСТАНОВЛЕН'}")
     logger.info("=" * 60)
     
-    # Удаляем webhook если есть
+    # Удаляем webhook если есть и ждём немного
     try:
         await bot.delete_webhook(drop_pending_updates=True)
         logger.info("✅ Webhook удалён, используем polling")
+        await asyncio.sleep(2)  # Небольшая задержка перед запуском polling
     except Exception as e:
         logger.warning(f"⚠️ Webhook: {e}")
     
